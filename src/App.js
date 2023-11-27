@@ -1,11 +1,10 @@
 import React from "react";
-import {ReactComponent as Card100} from "./resource/svg/100.svg"
+import Game from "./component/Game"
 
 function App() {
+
   return (
-      <div className="App">
-          <Card100/>
-      </div>
+      <Game/>
   );
 }
 

@@ -16,7 +16,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "nodemon --exec 'npm start'"
+    "dev": "nodemon --exec 'npm start'",
+    "dev-macos": "nodemon --exec 'BROWSER='safari' react-scripts start'"
   },
   "eslintConfig": {
     "extends": [
