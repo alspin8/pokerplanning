@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+
 import {ReactComponent as Card0     } from "../resource/svg/0.svg";
 import {ReactComponent as Card1     } from "../resource/svg/1.svg";
 import {ReactComponent as Card1_2   } from "../resource/svg/1_2.svg";
@@ -10,8 +11,10 @@ import {ReactComponent as Card13    } from "../resource/svg/13.svg";
 import {ReactComponent as Card20    } from "../resource/svg/20.svg";
 import {ReactComponent as Card40    } from "../resource/svg/40.svg";
 import {ReactComponent as Card100   } from "../resource/svg/100.svg";
-import {ReactComponent as CardInter } from "../resource/svg/inter.svg";
-// import {ReactComponent as CardPC} from "../resource/svg/PauseCafe.svg";
+// import {ReactComponent as CardInter } from "../resource/svg/inter.svg";
+import usePlayer from "../hooks/UsePlayer";
+import useTask from "../hooks/UseTask";
+import LandingPage from "./LandingPage";
 
 const Game = () => {
 
@@ -21,17 +24,19 @@ const Game = () => {
         maxPlayer: 4
     }
 
-    const defaultTasks = [
-        {card: CardInter, text: ""}
-    ]
+    const playersHook = usePlayer();
+    const [players, addPlayer, removePlayer] = playersHook;
+    const tasksHook = useTask();
+    const [tasks, addTask, removeTask, setTaskText, setTaskCard] = tasksHook;
+    const modeHook = useState(config.modes[0]);
+    const [mode, setMode] = modeHook;
 
-    const [players, setPlayers] = useState([]);
-    const [tasks, setTasks] = useState(defaultTasks);
-    const [mode, setMode] = useState(config.modes[0]);
+    const gameStateHook = useState("config");
+    const [gameState, setGameState] = gameStateHook;
 
     return(
         <>
-
+            {gameState === "config" && <LandingPage config={config} modeHook={modeHook} tasksHook={tasksHook} playersHook={playersHook} gStateHook={gameStateHook}/>}
         </>
     );
 }

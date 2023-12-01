@@ -2,3 +2,44 @@
     margin: 0;
     padding: 0;
 }
+
+@font-face {
+    font-family: "Karantina";
+    src: local("Karantina-Regular"), url("../font/Karantina-Regular.ttf") format("truetype") ;
+}
+
+.karanrina {
+    font-family: "Karantina", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+}
+
+.flex {
+    display: inline-flex;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.text-md {
+    font-size: 18pt;
+}
+
+.text-l {
+    font-size: 24pt;
+}
+
+.pl-2 {
+    padding-left: 0.5rem;
+}
+
+.input-reset {
+    border: none;
+    outline: none;
+}
+
