@@ -1,10 +1,14 @@
 import {useState} from "react";
 import TaskTable from "./TaskTable";
+import PlayerTable from "./PlayerTable";
+import "../resource/style/style.css";
 
 const LandingPage = ({config, playersHook, tasksHook, modeHook, gStateHook}, context) => {
 
     const [name, setName] = useState("");
     const [text, setText] = useState("");
+    
+    const [numPlayers, setNumPlayers] = useState(2);
 
     const [players, addPlayer, removePlayer] = playersHook;
     const [tasks, addTask, removeTask] = tasksHook;
@@ -38,6 +42,11 @@ const LandingPage = ({config, playersHook, tasksHook, modeHook, gStateHook}, con
             {/*</ul>*/}
 
             <TaskTable data={tasks} add={addTask} remove={removeTask}/>
+            {/*Faire attention a la longueur des taches, on peut définir un max de caractères peut être ? Comme pour le nom un max de joueur*/}
+            <PlayerTable data={players} add={addPlayer} remove={removePlayer}/>
+            
+            
+            <button className="custom-button" onClick={() => setGameState("config_done")}>Lancer le jeu</button>
 
             {/*<div style={{display: "flex"}}>*/}
             {/*    <input type="text" id="name" onChange={(e) => setText(e.target.value)}/>*/}
@@ -46,6 +55,7 @@ const LandingPage = ({config, playersHook, tasksHook, modeHook, gStateHook}, con
 
             {/*<button onClick={() => setGameState("config_done")}>Done</button>*/}
         </>
+
     );
 }
 
