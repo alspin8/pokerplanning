@@ -57,7 +57,7 @@ const LandingPage = ({config, playersHook, tasksHook, modeHook, gStateHook}, con
             <PlayerTable data={players} add={addPlayer} remove={removePlayer}/>
             
         
-            <button className="custom-button" onClick={startGame}>
+            <button className="custom-button-start" onClick={startGame}>
                 Lancer le jeu
             </button>
             {/*<div style={{display: "flex"}}>*/}

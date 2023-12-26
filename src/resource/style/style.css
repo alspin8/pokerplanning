@@ -1,24 +1,87 @@
+@font-face {
+  font-family: "Karantina";
+  src: local("Karantina-Regular"), url("../font/Karantina-Regular.ttf") format("truetype") ;
+
+  font-family: "Karantina-Bold";
+  src: local("Karantina-Bold"), url("../font/Karantina-Bold.ttf") format("truetype") ;
+
+  font-family: "Karantina-Light";
+  src: local("Karantina-Light"), url("../font/Karantina-Light.ttf") format("truetype") ;
+}
+
 .player-table-container {
     margin-left: auto;
 }
 
-.custom-button {
-    font-family: 'Karantina-Bold';
-    border: none;
-    border-radius: 8px;
-    padding: 15px 30px;
-    background-color: #4CAF50;
-    color: black;
-    font-size: 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    position: absolute;
-    right:    50%;
-    bottom:   20%;
-  }
+.custom-button-start {
+  font-family: 'Karantina-Bold';
+  border: none;
+  border-radius: 8px;
+  padding: 15px 30px;
+  background-color: #4CAF50;
+  color: black;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: absolute;
+  right:    50%;
+  bottom:   20%;
+}
   
-  .custom-button:hover {
-    background-color: #45a049;
-  }
+.custom-button-start:hover {
+  background-color: #45a049;
+}
   
-  
+.titre_page{
+  text-align: center;
+  font-family: 'Karantina-Bold';
+  font-size: 50px;
+}
+
+.titre_text{
+  text-align: center;
+  font-size : 20px;
+  font-family: 'Karantina-Regular';
+}
+
+.card_list{
+  display: flex;
+  justify-content: center;
+}
+
+.card_div{
+  margin : 5px;
+}
+
+.card{
+  width: 50px;
+  height: auto;
+  cursor: pointer;
+}
+
+.card:hover{
+  width:60px;
+  height: auto;
+}
+
+.card_selected{
+  width:60px;
+  height: auto;
+}
+
+.button-endTurn{
+  font-family: 'Karantina-Bold';
+  border: none;
+  border-radius: 8px;
+  padding: 15px 30px;
+  background-color: #4CAF50;
+  color: black;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  left: 50%;
+}
+
+.button-endTurn:hover {
+  background-color: #45a049;
+}

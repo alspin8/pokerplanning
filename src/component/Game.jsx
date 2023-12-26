@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { ReactComponent as Tapis } from "../resource/svg/tapis.svg";
+import { ReactComponent as CardInter } from "../resource/svg/inter.svg";
 import { ReactComponent as Card0 } from "../resource/svg/0.svg";
 import { ReactComponent as Card1 } from "../resource/svg/1.svg";
 import { ReactComponent as Card1_2 } from "../resource/svg/1_2.svg";
@@ -16,13 +17,13 @@ import { ReactComponent as Card100 } from "../resource/svg/100.svg";
 import usePlayer from "../hooks/UsePlayer";
 import useTask from "../hooks/UseTask";
 import LandingPage from "./LandingPage";
+import "../resource/style/style.css";
 
 const Game = () => {
 
     const config = {
         modes: ["mean", "majority"],
-        cards: [Card0, Card1, Card1_2, Card2, Card3, Card5, Card8, Card13, Card20, Card40, Card100],
-        tapis: Tapis,
+        cards: [CardInter, Card0, Card1, Card1_2, Card2, Card3, Card5, Card8, Card13, Card20, Card40, Card100],
         maxPlayer: 4
     }
 
@@ -36,41 +37,32 @@ const Game = () => {
     const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
     const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
     const [cardPlayed, setCardPlayed] = useState(0);
+    const [playerCard, setPlayerCard] = useState(0);
     const [playersPlayed, setPlayersPlayed] = useState(0);
 
     const gameStateHook = useState("config");
     const [gameState, setGameState] = gameStateHook;
 
-    // console.log(tasks);
-    // console.log(players);
-    // console.log(config.cards);
+    //Problème : Afficher Carte sur le tapis (quoi mettre en défaut genre choix caché) 
 
     //Fin du tour (clique sur le bouton)
     const endTurn = () => {
-        if (cardPlayed !== undefined){
-            setPlayersPlayed(0);
-            setCurrentPlayerIndex((prevIndex) => (prevIndex + 1) % players.length);
-            // console.log(cardPlayed);
-            playCard();
-        }
-        else{
-            alert("Vous devez sélectionnez une carte avant de poursuivre.");
-        } 
+        console.log(playerCard);
+        setCurrentPlayerIndex((prevIndex) => (prevIndex + 1) % players.length);
+        playCard();
     };
 
-    //Choix de la carte joué, Problème : relié svg avec index ?
+    //Choix de la carte joué 
     const updateCard = (cardIndex) => {
         setCardPlayed(cardIndex);
-        // console.log(cardIndex);
+        setPlayerCard(() => {
+            return cardIndex;});
     }
     
     // Fonction pour passer au tour suivant si une carte a été choisi
     const playCard = () => {
-        setCardPlayed();
-        //Problème avec prevCount
+        setCardPlayed(0);
         setPlayersPlayed((prevCount) => prevCount + 1);
-
-        console.log(players.length);
         if (playersPlayed === players.length - 1) {
             setPlayersPlayed(0);
             console.log("Tout le monde à jouer");
@@ -94,17 +86,18 @@ const Game = () => {
 
             {gameState !== "config" && (
                 <>
-                    <Tapis style={{ width: "40%", height: "auto", marginLeft: "30%" }} />
+                    <h1 className="titre_page">Planning Poker</h1>
+                    <Tapis style={{ width: "50%", height: "auto", marginLeft: "25%" }} />
 
-                    <div style={{ textAlign: "center" }}>
+                    <div className="titre_text">
                         <h3>{tasks[currentTaskIndex]?.text}</h3>
                         <h2>{`${players[currentPlayerIndex]}, à toi de jouer`}</h2>
 
-                        <div style={{ display: "flex", justifyContent: "center" }}>
+                        <div className="card_list">
                             {config.cards.map((Card, index) => (
-                                <div key={index} style={{ margin: "5px" }}>
+                                <div key={index} className="card_div">
                                     <Card
-                                        style={{ width: "50px", height: "auto" }}
+                                        className={`card ${cardPlayed === index ? 'card_selected' : ''}`}
                                         onClick={() => updateCard(index)}
                                     />
                                 </div>
@@ -112,7 +105,7 @@ const Game = () => {
                         </div>
 
                         <button
-                            style={{ display: "block", margin: "20px auto", width: "60px" }}
+                            className="button-endTurn"
                             onClick={endTurn}
                         >
                             Fin du tour
