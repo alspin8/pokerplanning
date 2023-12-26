@@ -5,6 +5,17 @@ import "../resource/style/style.css";
 
 const LandingPage = ({config, playersHook, tasksHook, modeHook, gStateHook}, context) => {
 
+    const startGame = () => {
+        // Check if the necessary conditions are met (e.g., minimum players, tasks)
+        if (players.length < 2 || tasks.length === 0) {
+            alert("Jouter au moins 2 joueurs et quelques tâches avant de lancer le jeu.");
+            return;
+        }
+    
+        // Update the game state to indicate that the configuration is done
+        setGameState("config_done");
+    };
+
     const [name, setName] = useState("");
     const [text, setText] = useState("");
     
@@ -45,9 +56,10 @@ const LandingPage = ({config, playersHook, tasksHook, modeHook, gStateHook}, con
             {/*Faire attention a la longueur des taches, on peut définir un max de caractères peut être ? Comme pour le nom un max de joueur*/}
             <PlayerTable data={players} add={addPlayer} remove={removePlayer}/>
             
-            
-            <button className="custom-button" onClick={() => setGameState("config_done")}>Lancer le jeu</button>
-
+        
+            <button className="custom-button" onClick={startGame}>
+                Lancer le jeu
+            </button>
             {/*<div style={{display: "flex"}}>*/}
             {/*    <input type="text" id="name" onChange={(e) => setText(e.target.value)}/>*/}
             {/*    <button onClick={() => text !== "" && addTask(text)}>AddTask</button>*/}

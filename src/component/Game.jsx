@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 
+import {ReactComponent as Tapis     } from "../resource/svg/tapis.svg";
 import {ReactComponent as Card0     } from "../resource/svg/0.svg";
 import {ReactComponent as Card1     } from "../resource/svg/1.svg";
 import {ReactComponent as Card1_2   } from "../resource/svg/1_2.svg";
@@ -21,6 +22,7 @@ const Game = () => {
     const config = {
         modes: ["mean", "majority"],
         cards: [Card0, Card1, Card1_2, Card2, Card3, Card5, Card8, Card13, Card20, Card40, Card100],
+        tapis: Tapis,
         maxPlayer: 4
     }
 
@@ -34,11 +36,49 @@ const Game = () => {
     const gameStateHook = useState("config");
     const [gameState, setGameState] = gameStateHook;
 
-    return(
+    console.log(tasks);
+    console.log(players);
+
+    return (
         <>
-            {gameState === "config" && <LandingPage config={config} modeHook={modeHook} tasksHook={tasksHook} playersHook={playersHook} gStateHook={gameStateHook}/>}
+          {gameState === "config" && (
+            <>
+              <LandingPage
+                config={config}
+                modeHook={modeHook}
+                tasksHook={tasksHook}
+                playersHook={playersHook}
+                gStateHook={gameStateHook}
+              />
+            </>
+          )}
+    
+          {gameState !== "config" && (
+            <>
+              <Tapis style={{ width: "70%", height: "auto" }} />
+              
+              {/* Test d'affichage des taches et joueurs pour voir si le passage à une autre page marche. */}
+              <div>
+                <h2>Tâches choisies :</h2>
+                <ul>
+                    
+                  {tasks.map((task, index) => (
+                    <li key={index}>{task.text}</li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h2>Joueurs choisis :</h2>
+                <ul>
+                  {players.map((player, index) => (
+                    <li key={index}>{player}</li>
+                  ))}
+                </ul>
+              </div>
+            </>
+          )}
         </>
-    );
-}
+      );
+    };
 
 export default Game;
