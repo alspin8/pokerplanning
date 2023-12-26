@@ -13,7 +13,7 @@ const LandingPage = ({config, playersHook, tasksHook, modeHook, gStateHook}, con
         }
     
         // Update the game state to indicate that the configuration is done
-        setGameState("config_done");
+        setGameState("play");
     };
 
     const [name, setName] = useState("");

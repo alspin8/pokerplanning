@@ -44,6 +44,7 @@ const Game = () => {
     const [gameState, setGameState] = gameStateHook;
 
     //Problème : Afficher Carte sur le tapis (quoi mettre en défaut genre choix caché) 
+    //Ajouter la carte que le joueur a choisi à son état ? Pour l'afficher à la fin du tour de tous les joueurs
 
     //Fin du tour (clique sur le bouton)
     const endTurn = () => {
@@ -84,7 +85,7 @@ const Game = () => {
                 </>
             )}
 
-            {gameState !== "config" && (
+            {gameState === "play" && (
                 <>
                     <h1 className="titre_page">Planning Poker</h1>
                     <Tapis style={{ width: "50%", height: "auto", marginLeft: "25%" }} />
