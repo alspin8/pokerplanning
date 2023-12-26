@@ -35,38 +35,45 @@ const Game = () => {
 
     const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
     const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
-    const [cardPlayed, setCarPlayed] = useState(0);
+    const [cardPlayed, setCardPlayed] = useState(0);
     const [playersPlayed, setPlayersPlayed] = useState(0);
 
     const gameStateHook = useState("config");
     const [gameState, setGameState] = gameStateHook;
 
-    console.log(tasks);
-    console.log(players);
-    console.log(config.cards);
+    // console.log(tasks);
+    // console.log(players);
+    // console.log(config.cards);
 
+    //Fin du tour (clique sur le bouton)
     const endTurn = () => {
-        setPlayersPlayed(0);
-        setCurrentPlayerIndex((prevIndex) => (prevIndex + 1) % players.length);
-        if (cardPlayed !== ""){
+        if (cardPlayed !== undefined){
+            setPlayersPlayed(0);
+            setCurrentPlayerIndex((prevIndex) => (prevIndex + 1) % players.length);
+            // console.log(cardPlayed);
             playCard();
         }
         else{
             alert("Vous devez sélectionnez une carte avant de poursuivre.");
-        }
-        
+        } 
     };
 
-    const updateCard = () => {
-        setCarPlayed()
-
+    //Choix de la carte joué, Problème : relié svg avec index ?
+    const updateCard = (cardIndex) => {
+        setCardPlayed(cardIndex);
+        // console.log(cardIndex);
     }
-
+    
+    // Fonction pour passer au tour suivant si une carte a été choisi
     const playCard = () => {
+        setCardPlayed();
+        //Problème avec prevCount
         setPlayersPlayed((prevCount) => prevCount + 1);
 
+        console.log(players.length);
         if (playersPlayed === players.length - 1) {
             setPlayersPlayed(0);
+            console.log("Tout le monde à jouer");
             setCurrentTaskIndex((prevIndex) => (prevIndex + 1) % tasks.length);
         }
     };
@@ -98,7 +105,7 @@ const Game = () => {
                                 <div key={index} style={{ margin: "5px" }}>
                                     <Card
                                         style={{ width: "50px", height: "auto" }}
-                                        onClick={updateCard}
+                                        onClick={() => updateCard(index)}
                                     />
                                 </div>
                             ))}
