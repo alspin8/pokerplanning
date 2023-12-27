@@ -1,7 +1,6 @@
 import "../resource/style/style.css";
 
 import Table from "./Table";
-import PlayerTable from "./PlayerTable";
 
 const GameSetting = ({config, hooks, start}, context) => {
 

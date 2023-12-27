@@ -16,7 +16,7 @@ import { ReactComponent as Card100 } from "../resource/svg/100.svg";
 // import {ReactComponent as CardInter } from "../resource/svg/inter.svg";
 import usePlayer from "../hooks/UsePlayer";
 import useTask from "../hooks/UseTask";
-import LandingPage from "./LandingPage";
+import GameSetting from "./GameSetting";
 import "../resource/style/style.css";
 
 const Game = () => {
@@ -28,9 +28,9 @@ const Game = () => {
     }
 
     const playersHook = usePlayer();
-    const [players, addPlayer, removePlayer, setPlayer] = playersHook;
+    const [players, addPlayer, removePlayer, setPlayerCardTurn] = playersHook;
     const tasksHook = useTask();
-    const [tasks, addTask, removeTask, setTask] = tasksHook;
+    const [tasks, addTask, removeTask, setTaskText, setTaskCard] = tasksHook;
     const modeHook = useState(config.modes[0]);
     const [mode, setMode] = modeHook;
 
@@ -52,7 +52,7 @@ const Game = () => {
         //MARCHE PAS
         console.log(currentPlayerIndex);
         console.log(cardPlayed);
-        setPlayer(currentPlayerIndex, {card: cardPlayed});
+        setPlayerCardTurn(currentPlayerIndex, cardPlayed);
 
         setCurrentPlayerIndex((prevIndex) => (prevIndex + 1) % players.length);
         playCard();
@@ -80,12 +80,10 @@ const Game = () => {
         <>
             {gameState === "config" && (
                 <>
-                    <LandingPage
+                    <GameSetting
                         config={config}
-                        modeHook={modeHook}
-                        tasksHook={tasksHook}
-                        playersHook={playersHook}
-                        gStateHook={gameStateHook}
+                        hooks={[playersHook, tasksHook, modeHook]}
+                        start={() => setGameState("play")}
                     />
                 </>
             )}
@@ -97,7 +95,7 @@ const Game = () => {
 
                     <div className="titre_text">
                         <h3>{tasks[currentTaskIndex]?.text}</h3>
-                        <h2>{`${players[currentPlayerIndex].text}, à toi de jouer`}</h2>
+                        <h2>{`${players[currentPlayerIndex]}, à toi de jouer`}</h2>
 
                         <div className="card_list">
                             {config.cards.map((Card, index) => (
