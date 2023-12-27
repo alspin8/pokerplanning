@@ -28,7 +28,7 @@ const Game = () => {
     }
 
     const playersHook = usePlayer();
-    const [players, addPlayer, removePlayer] = playersHook;
+    const [players, addPlayer, removePlayer, setPlayerCardTurn] = playersHook;
     const tasksHook = useTask();
     const [tasks, addTask, removeTask, setTaskText, setTaskCard] = tasksHook;
     const modeHook = useState(config.modes[0]);
@@ -48,7 +48,12 @@ const Game = () => {
 
     //Fin du tour (clique sur le bouton)
     const endTurn = () => {
-        console.log(playerCard);
+        //console.log(playerCard);
+        //MARCHE PAS
+        console.log(currentPlayerIndex);
+        console.log(cardPlayed);
+        setPlayerCardTurn(currentPlayerIndex, cardPlayed);
+
         setCurrentPlayerIndex((prevIndex) => (prevIndex + 1) % players.length);
         playCard();
     };
@@ -56,8 +61,8 @@ const Game = () => {
     //Choix de la carte joué 
     const updateCard = (cardIndex) => {
         setCardPlayed(cardIndex);
-        setPlayerCard(() => {
-            return cardIndex;});
+    //     setPlayerCard(() => {
+    //         return cardIndex;});
     }
     
     // Fonction pour passer au tour suivant si une carte a été choisi
@@ -112,7 +117,7 @@ const Game = () => {
                             Fin du tour
                         </button>
                     </div>
-                </>
+                    </>
             )}
         </>
     );

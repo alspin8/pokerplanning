@@ -3,7 +3,6 @@ import {useState} from "react";
 const _initialState = [
     {text: "Créer la structure de base de la base de données.",                                 card: undefined},
     {text: "Élaborer le diagramme de classes pour l'architecture logicielle.",                  card: undefined},
-    {text: "Élaborer le diagramme de classes pour l'architecture logicielle.",                  card: undefined},
     {text: "Mettre en place un système de gestion des versions avec Git.",                      card: undefined},
     {text: "Rédiger la documentation technique pour le module de traitement des données.",      card: undefined},
     {text: "Effectuer des tests unitaires pour la fonctionnalité de recherche",                 card: undefined},
