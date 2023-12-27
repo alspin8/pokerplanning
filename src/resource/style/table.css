@@ -1,0 +1,45 @@
+.input-table {
+    --index-width: 20px;
+    --button-width: 18px;
+
+    display: inline;
+    width: var(--table-width);
+    max-width: var(--table-width);
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.input-table tbody {
+    width: 100%;
+    display: table;
+}
+
+.input-table input {
+    display: block;
+    border: none;
+    outline: none;
+    width: 100%;
+}
+
+.input-table tr, input {
+    font-family: "Karantina", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18pt;
+}
+
+.input-table td:nth-child(1) {
+    width: var(--index-width);
+}
+
+.input-table td:nth-child(2) {
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: calc(var(--table-width) - (var(--index-width) + var(--button-width)));
+}
+
+.input-table td:nth-child(3) {
+    width: var(--button-width);
+}

@@ -39,7 +39,16 @@
 }
 
 .input-reset {
+    display: block;
     border: none;
     outline: none;
+}
+
+.one-line {
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 100%;
 }
 
