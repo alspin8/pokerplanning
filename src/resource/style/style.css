@@ -69,6 +69,43 @@
   height: auto;
 }
 
+.card_onTable_0{
+  position: absolute;
+  width: 60px;
+  height: auto;
+
+  top: 33%;
+  left: 28%;
+}
+
+.card_onTable_1{
+  position: absolute;
+  width: 60px;
+  height: auto;
+
+  top: 33%;
+  left: 66%;
+}
+
+.card_onTable_2{
+  position: absolute;
+  width: 60px;
+  height: auto;
+
+  top: 10%;
+  left: 48%;
+}
+
+.card_onTable_3{
+  position: absolute;
+  width: 60px;
+  height: auto;
+
+  top: 60%;
+  left: 48%;
+}
+
+
 .button-endTurn{
   font-family: 'Karantina-Bold';
   border: none;

@@ -20,6 +20,8 @@ import useTask from "../hooks/UseTask";
 import GameSetting from "./GameSetting";
 import "../resource/style/style.css";
 
+var playerCard = [];
+
 const Game = () => {
 
     const config = {
@@ -49,11 +51,8 @@ const Game = () => {
     //Fin du tour (clique sur le bouton)
     const endTurn = () => {
         setCurrentPlayerIndex((prevIndex) => (prevIndex + 1) % players.length);
-
-        setPlayer(currentPlayerIndex, {card: cardPlayed});
-        console.log(players[0]);
-        console.log(players[1]);
-        
+        setPlayer(currentPlayerIndex, { card: cardPlayed });
+        playerCard[currentPlayerIndex] = cardPlayed;
         playCard();
     };
 
@@ -70,9 +69,42 @@ const Game = () => {
             setPlayersPlayed(0);
             console.log("Tout le monde à jouer");
             setCurrentTaskIndex((prevIndex) => (prevIndex + 1) % tasks.length);
-            for (let i = 0; i <= players.length-1; i++){
-                setPlayer(i, {card: undefined});
-            }
+        }
+    };
+
+    const renderCardByIndex = (indexCard, indexPlayer) => {
+        console.log(indexCard);
+        console.log(indexPlayer);
+        var nomClasse = "card_onTable_"+indexPlayer
+        switch (indexCard) {
+            case -1:
+                return <CardInter className={nomClasse} />
+            case 0:
+                return <Card0 className={nomClasse} />;
+            case 1:
+                return <Card1 className={nomClasse} />;
+            case 2:
+                return <Card1_2 className={nomClasse} />;
+            case 3:
+                return <Card2 className={nomClasse} />;
+            case 4:
+                return <Card3 className={nomClasse} />;
+            case 5:
+                return <Card5 className={nomClasse} />;
+            case 6:
+                return <Card8 className={nomClasse} />;
+            case 7:
+                return <Card13 className={nomClasse} />;
+            case 8:
+                return <Card20 className={nomClasse} />;
+            case 9:
+                return <Card40 className={nomClasse} />;
+            case 10:
+                return <Card100 className={nomClasse} />;
+            case 11:
+                return <CardCafe className={nomClasse} />;
+            default:
+                return null;
         }
     };
 
@@ -90,8 +122,17 @@ const Game = () => {
 
             {gameState === "play" && (
                 <>
+                    {playersPlayed === (players.length - 1) && (
+                        <div>
+                            {players.map((Player, index) =>
+                                renderCardByIndex((Player.card)-1, index)
+                            )}
+                        </div>
+                    )}
+
                     <h1 className="titre_page">Planning Poker</h1>
-                    <Tapis style={{ width: "50%", height: "auto", marginLeft: "25%" }} />
+                    <Tapis style={{ width: "50%", height: "auto", marginLeft: "25%", zIndex: 1 }}>
+                    </Tapis>
 
                     <div className="titre_text">
                         <h3>{tasks[currentTaskIndex]?.text}</h3>
