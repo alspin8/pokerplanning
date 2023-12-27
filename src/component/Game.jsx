@@ -48,11 +48,12 @@ const Game = () => {
 
     //Fin du tour (clique sur le bouton)
     const endTurn = () => {
-        // console.log(currentPlayerIndex);
-        // console.log(cardPlayed);
-        setPlayer(currentPlayerIndex, { card: cardPlayed });
-
         setCurrentPlayerIndex((prevIndex) => (prevIndex + 1) % players.length);
+
+        setPlayer(currentPlayerIndex, {card: cardPlayed});
+        console.log(players[0]);
+        console.log(players[1]);
+        
         playCard();
     };
 
@@ -69,6 +70,9 @@ const Game = () => {
             setPlayersPlayed(0);
             console.log("Tout le monde à jouer");
             setCurrentTaskIndex((prevIndex) => (prevIndex + 1) % tasks.length);
+            for (let i = 0; i <= players.length-1; i++){
+                setPlayer(i, {card: undefined});
+            }
         }
     };
 
