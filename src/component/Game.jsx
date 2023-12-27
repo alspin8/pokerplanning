@@ -28,9 +28,9 @@ const Game = () => {
     }
 
     const playersHook = usePlayer();
-    const [players, addPlayer, removePlayer, setPlayerCardTurn] = playersHook;
+    const [players, addPlayer, removePlayer, setPlayer] = playersHook;
     const tasksHook = useTask();
-    const [tasks, addTask, removeTask, setTaskText, setTaskCard] = tasksHook;
+    const [tasks, addTask, removeTask, setTask] = tasksHook;
     const modeHook = useState(config.modes[0]);
     const [mode, setMode] = modeHook;
 
@@ -52,7 +52,7 @@ const Game = () => {
         //MARCHE PAS
         console.log(currentPlayerIndex);
         console.log(cardPlayed);
-        setPlayerCardTurn(currentPlayerIndex, cardPlayed);
+        setPlayer(currentPlayerIndex, {card: cardPlayed});
 
         setCurrentPlayerIndex((prevIndex) => (prevIndex + 1) % players.length);
         playCard();
@@ -97,7 +97,7 @@ const Game = () => {
 
                     <div className="titre_text">
                         <h3>{tasks[currentTaskIndex]?.text}</h3>
-                        <h2>{`${players[currentPlayerIndex]}, à toi de jouer`}</h2>
+                        <h2>{`${players[currentPlayerIndex].text}, à toi de jouer`}</h2>
 
                         <div className="card_list">
                             {config.cards.map((Card, index) => (
