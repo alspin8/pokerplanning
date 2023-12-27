@@ -74,8 +74,8 @@
   width: 60px;
   height: auto;
 
-  top: 33%;
-  left: 28%;
+  top: 15%;
+  left: 48%;
 }
 
 .card_onTable_1{
@@ -83,8 +83,8 @@
   width: 60px;
   height: auto;
 
-  top: 33%;
-  left: 66%;
+  top: 50%;
+  left: 29%;
 }
 
 .card_onTable_2{
@@ -92,7 +92,7 @@
   width: 60px;
   height: auto;
 
-  top: 10%;
+  top: 92%;
   left: 48%;
 }
 
@@ -101,10 +101,9 @@
   width: 60px;
   height: auto;
 
-  top: 60%;
-  left: 48%;
+  top: 50%;
+  left: 67%;
 }
-
 
 .button-endTurn{
   font-family: 'Karantina-Bold';
