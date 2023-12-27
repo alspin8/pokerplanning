@@ -18,29 +18,22 @@ const _initialState = [
 const useTask = (initialState = _initialState) => {
     const [tasks, setTasks] = useState(initialState);
 
-    const add = (text, card = undefined) => {
-        setTasks(prev => [...prev, {text, card}]);
+    const add = (task) => {
+        setTasks(prev => [...prev, task]);
     }
 
     const remove = (idx) => {
         setTasks(prev => prev.filter((_, i) => i !== idx))
     }
 
-    const setText = (idx, text) => {
+    const set = (idx, task) => {
         setTasks(prev => {
-            prev[idx].text = text
+            prev[idx] = {...prev[idx], ...task}
             return [...prev];
         })
     }
 
-    const setCard = (idx, card) => {
-        setTasks(prev => {
-            prev[idx].card = card;
-            return [...prev];
-        })
-    }
-
-    return [tasks, add, remove, setText, setCard];
+    return [tasks, add, remove, set];
 }
 
 export default useTask;

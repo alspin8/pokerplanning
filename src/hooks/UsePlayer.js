@@ -3,22 +3,24 @@ import {useState} from "react";
 const usePlayer = (initialState = []) => {
     const [players, setPlayers] = useState(initialState);
 
-    const add = (name, card = undefined) => {
-        setPlayers(prev => [...prev, {name, card}]);
+    // to add new player : add({text: "", ...})
+    const add = (player) => {
+        setPlayers(prev => [...prev, player]);
     }
 
     const remove = (idx) => {
         setPlayers(prev => prev.filter((_, i) => i !== idx))
     }
 
-    const setCard = (idx, card) => {
+    // to set new player : set(index, {text: "", ...})
+    const set = (idx, player) => {
         setPlayers(prev => {
-            prev[idx].card = card;
+            prev[idx] = {...prev[idx], ...player};
             return [...prev];
         })
     }
 
-    return [players, add, remove, setCard];
+    return [players, add, remove, set];
 }
 
 export default usePlayer;
