@@ -14,7 +14,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject",
     "dev": "nodemon --exec 'npm start'",
     "dev-macos": "nodemon --exec 'BROWSER='safari' react-scripts start'"
@@ -38,6 +38,7 @@
     ]
   },
   "devDependencies": {
+    "jest": "^27.5.1",
     "nodemon": "^3.0.1"
   }
 }

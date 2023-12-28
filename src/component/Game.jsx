@@ -92,7 +92,7 @@ const Game = () => {
 
     //Afficher la bonne carte en fonction du choix des joueurs
     const renderCardByIndex = (indexCard, indexPlayer) => {
-        var nomClasse = "card_onTable_"+indexPlayer
+        const nomClasse = "card_onTable_" + indexPlayer
         switch (indexCard) {
             case -1:
                 return <CardInter className={nomClasse} />
@@ -193,19 +193,18 @@ const Game = () => {
             }
 
             {gameState === "play" && (
-                <>
-                    
+                <div className="flex flex-col align-center justify-center gap-20 h-screen w-screen">
+
 
                     <h1 className="titre_page">Planning Poker</h1>
-                        <Tapis style={{ width: "40%", height: "auto", marginLeft: "25%", zIndex: 1 }}/>
 
-                    {playersPlayed === (players.length) && (
-                        <div>
-                            {players.map((Player, index) =>
-                                renderCardByIndex((Player.card)-1, index)
-                            )}
-                        </div>
-                    )}
+                    <Tapis style={{width: "35%", height: "auto"}}/>
+
+                    <div>
+                        {players.map((player, index) =>
+                            renderCardByIndex((player.card) - 1, index)
+                        )}
+                    </div>
 
                     <div className="titre_text">
                         <h3>{tasks[currentTaskIndex]?.text}</h3>
@@ -229,13 +228,13 @@ const Game = () => {
                             Fin du tour
                         </button>
                     </div>
-                </>
+                </div>
             )}
 
             {gameState === "end" &&
                 <div className="flex w-screen justify-center pt-10">
                     <div className="flex flex-col gap-10">
-                        {tasks.map((task, i) =>
+                    {tasks.map((task, i) =>
                             config.cards.filter((value, index) => index === task.card).map(
                                 (Card) =>
                                     <div className="flex" key={i}>
