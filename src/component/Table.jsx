@@ -70,8 +70,8 @@ const Table = ({hook, limit, clazz}, context) => {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td></td>
-                                    <td></td>
+                                    <td> </td>
+                                    <td> </td>
                                     <td>
                                         <CheckmarkIcon onClick={handleAdd}/>
                                     </td>
