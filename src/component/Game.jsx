@@ -20,6 +20,7 @@ import useTask from "../hooks/UseTask";
 import GameSetting from "./GameSetting";
 import "../resource/style/style.css";
 
+//variables externes
 var playersPlayed = 0;
 
 const Game = () => {
@@ -30,6 +31,8 @@ const Game = () => {
         maxPlayer: 4
     }
 
+
+    //constantes
     const playersHook = usePlayer();
     const [players, addPlayer, removePlayer, setPlayer] = playersHook;
     const tasksHook = useTask();
@@ -44,22 +47,23 @@ const Game = () => {
     const gameStateHook = useState("config");
     const [gameState, setGameState] = gameStateHook;
 
-    //Choix de la carte joué 
-    const updateCard = (cardIndex) => {
-        setCardPlayed(cardIndex); 
-        if (playersPlayed == players.length){
-            playersPlayed = 0;
-        }  
-    }
-
-    //Fin du tour (clique sur le bouton)
-    const endTurn = () => {
-        setCurrentPlayerIndex((prevIndex) => (prevIndex + 1) % players.length);
-        setPlayer(currentPlayerIndex, { card: cardPlayed });
-        setCardPlayed(0);
-        playersPlayed += 1;
-        if (playersPlayed === players.length) {
-            setCurrentTaskIndex((prevIndex) => (prevIndex + 1) % tasks.length);
+    //MARCHE PAS A CORRIGER
+    const unanime = () => {
+        console.log("resolution");
+        //MARCHE QUE POUR 4
+        for (let i = 0; i < players.length-2; i++) {
+            if (players[i].card == players[i+1].card){
+                setTask(currentTaskIndex, {card: players[i].card});
+                setCurrentTaskIndex((prevIndex) => (prevIndex + 1) % tasks.length);
+                console.log("Hey yo");
+            }
+            else{
+                alert("Veuillez faire un débat et recommencer le vote pour cette tâche")
+                setTask(currentTaskIndex, {card: undefined});
+                setCurrentTaskIndex((prevIndex) => (prevIndex) % tasks.length);
+                console.log("Yo Hey");
+                break;
+            }
         }
     };
 
@@ -98,6 +102,25 @@ const Game = () => {
         }
     };
 
+    //Choix de la carte joué 
+    const updateCard = (cardIndex) => {
+        setCardPlayed(cardIndex); 
+        if (playersPlayed == players.length){
+            playersPlayed = 0;
+        }  
+    }
+
+    //Fin du tour (clique sur le bouton)
+    const endTurn = () => {
+        setCurrentPlayerIndex((prevIndex) => (prevIndex + 1) % players.length);
+        setPlayer(currentPlayerIndex, { card: cardPlayed });
+        setCardPlayed(0);
+        playersPlayed += 1;
+        if (playersPlayed === players.length) {
+            unanime()
+        }
+    };
+
     return (
         <>
             {gameState === "config" && (
@@ -121,6 +144,7 @@ const Game = () => {
                         <div>
                             {players.map((Player, index) =>
                                 renderCardByIndex((Player.card)-1, index)
+                                
                             )}
                             
                         </div>
