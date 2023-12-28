@@ -58,6 +58,10 @@
     padding-left: 0.5rem;
 }
 
+.pr-2 {
+    padding-right: 0.5rem;
+}
+
 .input-reset {
     display: block;
     border: none;
@@ -72,11 +76,11 @@
     max-width: 100%;
 }
 
-.h-full {
+.h-screen {
     height: 100vh;
 }
 
-.w-full {
+.w-screen {
     width: 100vw;
 }
 
@@ -100,3 +104,6 @@
     height: 400px;
 }
 
+.h-450 {
+    height: 450px;
+}

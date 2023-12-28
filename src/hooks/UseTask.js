@@ -33,7 +33,11 @@ const useTask = (initialState = _initialState) => {
         })
     }
 
-    return [tasks, add, remove, set];
+    const clear = () => {
+        setTasks([]);
+    }
+
+    return [tasks, add, remove, set, clear];
 }
 
 export default useTask;

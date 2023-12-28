@@ -1,3 +1,10 @@
+* {
+    --frame-color: #eee1d9;
+    --cell-color: #decec9;
+    --mode-button-color : #4a9898;
+    --mode-button-active-color : #f3ddca;
+}
+
 .pilule-btn {
     display: inline-block;
     padding: 10px 20px;
@@ -6,7 +13,7 @@
     text-decoration: none;
     border: 2px solid #29a722;
     border-radius: 15px;
-    background-color: #29a722;
+    background-color: var(--cell-color);
     color: #fff;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
@@ -19,27 +26,40 @@
 }
 
 .foo {
-    background-color: #829b81;
+    background-color: var(--frame-color);
     border-radius: 25px;
     padding: 5px 0;
 }
 
 .master {
-    background-color: #829b81;
+    background-color: var(--frame-color);
     padding: 20px;
     border-radius: 25px;
 }
 
 .cell {
-    background-color: #29a722;
+    background-color: var(--cell-color);
     padding: 20px;
     border-radius: 25px;
 }
 
 .mode-button {
-    background-color: #4a9898;
-    padding: 20px;
-    border-radius: 25px;
+    background-color: var(--frame-color);
+    padding: 10px 20px;
+    border-radius: 15px;
+    line-height: 2rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    box-sizing: border-box;
+}
+
+.mode-button:hover {
+    /*background-color: var(--frame-color);*/
+    box-shadow: inset 1px 1px 1px 1px black;
+}
+
+.mode-button-active {
+    background-color: var(--mode-button-active-color);
 }
 
 .f {
@@ -48,4 +68,17 @@
 
 .mode-selector {
     flex: 1 1 auto;
+}
+
+.right {
+    margin-left: auto;
+}
+
+.dl-button {
+    margin-left: auto;
+    padding-right: 5px;
+}
+
+.task-text {
+    margin-left: auto;
 }
