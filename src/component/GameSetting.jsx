@@ -50,7 +50,7 @@ const GameSetting = ({config, hooks, start}, context) => {
                     </div>
 
 
-                    <div className="cell">
+                    <div className="cell" onClick={() => startGame()}>
                         <StartSvg width={80} height={80}/>
                     </div>
 
