@@ -6,7 +6,7 @@ import {ReactComponent as AddIcon      } from "../resource/svg/add.svg";
 import {ReactComponent as RemoveIcon   } from "../resource/svg/remove.svg";
 import {ReactComponent as CheckmarkIcon} from "../resource/svg/checkmark.svg";
 
-const Table = ({hook, limit, classSize}, context) => {
+const Table = ({hook, limit, clazz}, context) => {
 
     const [data, add, remove] = hook;
 
@@ -20,20 +20,20 @@ const Table = ({hook, limit, classSize}, context) => {
 
     const handleAdd = () => {
         if (text !== "") {
-            // if (limit && data.length > limit) {
-            //     alert("Limite d'entrées atteinte.")
-            // }
-            // else {
+            if (limit && data.length > limit) {
+                alert("Limite d'entrées atteinte.")
+            }
+            else {
                 add({text: text})
                 setText("");
                 setAdding(false);
-            // }
+            }
         }
     }
 
     return (
-        <div className="flex">
-            <table className={`${classSize} input-table`}>
+        <div className={`flex`}>
+            <table className={`input-table ${clazz}`}>
                 <tbody>
                     {
                         data.map((row, index) => {

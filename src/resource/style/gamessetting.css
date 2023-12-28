@@ -1,7 +1,51 @@
-.task-table {
-    --table-width: 600px;
+.pilule-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    border: 2px solid #29a722;
+    border-radius: 15px;
+    background-color: #29a722;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    width: fit-content;
 }
 
-.player-table {
-    --table-width: 300px;
+.pilule-btn:hover {
+    background-color: #fff;
+    color: #29a722;
+}
+
+.foo {
+    background-color: #829b81;
+    border-radius: 25px;
+    padding: 5px 0;
+}
+
+.master {
+    background-color: #829b81;
+    padding: 20px;
+    border-radius: 25px;
+}
+
+.cell {
+    background-color: #29a722;
+    padding: 20px;
+    border-radius: 25px;
+}
+
+.mode-button {
+    background-color: #4a9898;
+    padding: 20px;
+    border-radius: 25px;
+}
+
+.f {
+    width: 100%;
+}
+
+.mode-selector {
+    flex: 1 1 auto;
 }
