@@ -20,7 +20,7 @@ import useTask from "../hooks/UseTask";
 import GameSetting from "./GameSetting";
 import "../resource/style/style.css";
 
-var playerCard = [];
+var playersPlayed = 0;
 
 const Game = () => {
 
@@ -40,41 +40,31 @@ const Game = () => {
     const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
     const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
     const [cardPlayed, setCardPlayed] = useState(0);
-    const [playersPlayed, setPlayersPlayed] = useState(0);
 
     const gameStateHook = useState("config");
     const [gameState, setGameState] = gameStateHook;
 
-    //Problème : Afficher Carte sur le tapis (quoi mettre en défaut genre choix caché) 
-    //Ajouter la carte que le joueur a choisi à son état ? Pour l'afficher à la fin du tour de tous les joueurs
+    //Choix de la carte joué 
+    const updateCard = (cardIndex) => {
+        setCardPlayed(cardIndex); 
+        if (playersPlayed == players.length){
+            playersPlayed = 0;
+        }  
+    }
 
     //Fin du tour (clique sur le bouton)
     const endTurn = () => {
         setCurrentPlayerIndex((prevIndex) => (prevIndex + 1) % players.length);
         setPlayer(currentPlayerIndex, { card: cardPlayed });
-        playerCard[currentPlayerIndex] = cardPlayed;
-        playCard();
-    };
-
-    //Choix de la carte joué 
-    const updateCard = (cardIndex) => {
-        setCardPlayed(cardIndex);
-    }
-
-    // Fonction pour passer au tour suivant si une carte a été choisi
-    const playCard = () => {
         setCardPlayed(0);
-        setPlayersPlayed((prevCount) => prevCount + 1);
-        if (playersPlayed === players.length - 1) {
-            setPlayersPlayed(0);
-            console.log("Tout le monde à jouer");
+        playersPlayed += 1;
+        if (playersPlayed === players.length) {
             setCurrentTaskIndex((prevIndex) => (prevIndex + 1) % tasks.length);
         }
     };
 
+    //Afficher la bonne carte en fonction du choix des joueurs
     const renderCardByIndex = (indexCard, indexPlayer) => {
-        console.log(indexCard);
-        console.log(indexPlayer);
         var nomClasse = "card_onTable_"+indexPlayer
         switch (indexCard) {
             case -1:
@@ -122,17 +112,19 @@ const Game = () => {
 
             {gameState === "play" && (
                 <>
-                    {playersPlayed === (players.length - 1) && (
+                    
+
+                    <h1 className="titre_page">Planning Poker</h1>
+                        <Tapis style={{ width: "50%", height: "auto", marginLeft: "25%", zIndex: 1 }}/>
+
+                    {playersPlayed === (players.length) && (
                         <div>
                             {players.map((Player, index) =>
                                 renderCardByIndex((Player.card)-1, index)
                             )}
+                            
                         </div>
                     )}
-
-                    <h1 className="titre_page">Planning Poker</h1>
-                    <Tapis style={{ width: "50%", height: "auto", marginLeft: "25%", zIndex: 1 }}>
-                    </Tapis>
 
                     <div className="titre_text">
                         <h3>{tasks[currentTaskIndex]?.text}</h3>
