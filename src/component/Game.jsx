@@ -22,11 +22,12 @@ import "../resource/style/style.css";
 
 //variables externes
 var playersPlayed = 0;
+let resolutionCount = 0;
 
 const Game = () => {
 
     const config = {
-        modes: ["unanimité", "moyenne"],
+        modes: ["unanimité", "majorité"],
         cards: [CardInter, Card0, Card1, Card1_2, Card2, Card3, Card5, Card8, Card13, Card20, Card40, Card100, CardCafe],
         maxPlayer: 4
     }
@@ -56,18 +57,36 @@ const Game = () => {
     }, [gameState])
 
     const unanime = () => {
+        console.log(mode)
         for (let i = 0; i < players.length; i++) {
             for (let j = 0; j < players.length; j++) {
                 if (i !== j && players[i].card !== players[j].card) {
                     alert("Veuillez faire un débat et recommencer le vote pour cette tâche")
-                    return false;
+                    return [false, null];
                 }
             }
         }
-        return true;
+        return [true, players[0].card];
     };
 
-    const moyenne = () => {
+    const majority = () => {
+        let count = []
+        for (let i = 0; i < config.cards.length; i++) {
+            count.push(0);
+        }
+        for (let i = 0; i < players.length; i++) {
+            count[players[i].card] += 1;
+        }
+
+        let imax = count.indexOf(Math.max(...count));
+        let vmax = count[imax]
+
+        if (count.filter((v) => v === vmax).length > 1) {
+            alert("Il n'y a pas de majorité, voté à nouveau.")
+            return [false, null];
+        }
+
+        return [true, imax];
 
     }
 
@@ -117,37 +136,45 @@ const Game = () => {
 
         setCurrentPlayerIndex(0);
         setCurrentTaskIndex(0);
+        resolutionCount = 0;
     }
 
     //Fin du tour (clique sur le bouton)
     const endTurn = () => {
         // If last player played compute resolution
         if (currentPlayerIndex === players.length - 1) {
-            let resolved = true;
-            switch (mode) {
-                case "unanimité":
-                    resolved = unanime();
-                    break;
-                case "moyenne":
-                    resolved = moyenne();
-                    break;
-                default:
-                    alert("Il semblerai que ce mode de jeu ne soit pas supporté.")
-                    break;
+            let resolved = [true, null];
+            if (resolutionCount === 0) {
+                resolved = unanime();
+            } else {
+                switch (mode) {
+                    case "unanimité":
+                        resolved = unanime();
+                        break;
+                    case "majorité":
+                        resolved = majority();
+                        break;
+                    default:
+                        alert("Il semblerai que ce mode de jeu ne soit pas supporté.")
+                        break;
+                }
             }
+
+            resolutionCount += 1;
 
             // Reset all player card
             for (let i = 0; i < players.length; i++) {
                 setPlayer(i, {card: 0})
             }
 
-            if (resolved) {
-                setTask(currentTaskIndex, {card: players[0].card});
+            if (resolved[0]) {
+                setTask(currentTaskIndex, {card: resolved[1]});
                 if (currentTaskIndex === tasks.length - 1) {
                     setGameState("end");
                     return;
                 }
                 setCurrentTaskIndex((prevIndex) => (prevIndex + 1) % tasks.length);
+                resolutionCount = 0;
             }
         }
 
