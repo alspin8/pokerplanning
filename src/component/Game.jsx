@@ -52,7 +52,6 @@ const Game = () => {
     useEffect(() => {
         if (gameState === "play") {
             initializeGame()
-            console.log("initialize")
         }
     }, [gameState])
 
@@ -207,17 +206,19 @@ const Game = () => {
             )}
 
             {gameState === "end" &&
-                <div>
-                    {tasks.map((task, i) =>
-                        config.cards.filter((value, index) => index === task.card).map(
-                            (Card) =>
-                                <div key={i}>
-                                    {task.text}
-                                    <Card width="80px"/>
-                                </div>
-                        )
-                    )}
-                    <button onClick={() => setGameState("config")}>New game</button>
+                <div className="flex w-screen justify-center pt-10">
+                    <div className="flex flex-col gap-10">
+                        {tasks.map((task, i) =>
+                            config.cards.filter((value, index) => index === task.card).map(
+                                (Card) =>
+                                    <div className="flex" key={i}>
+                                        {task.text}
+                                        <Card width="60px" height="60px"/>
+                                    </div>
+                            )
+                        )}
+                        <button onClick={() => setGameState("config")}>New game</button>
+                    </div>
                 </div>
             }
         </>
